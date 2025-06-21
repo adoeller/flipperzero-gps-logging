@@ -9,7 +9,7 @@ static File* gpx_log_file = NULL;
 static int gpx_log_counter = 0;
 static Storage* storage = NULL;
 
-static void init_gpx_log(void) {
+void init_gpx_log(void) {
     char buffer[256];
     Storage* storage = furi_record_open(RECORD_STORAGE);
     DateTime datetime;
@@ -41,7 +41,7 @@ static void init_gpx_log(void) {
     furi_record_close(RECORD_STORAGE);
 }
 
-static void log_gpx(GpsUart* gps_uart) {
+void log_gpx(GpsUart* gps_uart) {
     if(!gpx_log_file || !gps_uart) return;
     if(!gps_uart->status.valid) return;
 
@@ -82,7 +82,7 @@ static void log_gpx(GpsUart* gps_uart) {
     }
 }
 
-static void close_gpx_log(void) {
+void close_gpx_log(void) {
     if(gpx_log_file) {
         char buffer[256];
 
