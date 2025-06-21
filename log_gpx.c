@@ -1,5 +1,10 @@
 #include <storage/storage.h>
 #include <furi_hal.h>
+#include <furi_hal_rtc.h>
+
+static File* gpx_log_file = NULL;
+static int gpx_log_counter = 0;
+static Storage* storage = NULL;
 
 static void init_gpx_log(void) {
     Storage* storage = furi_record_open(RECORD_STORAGE);
