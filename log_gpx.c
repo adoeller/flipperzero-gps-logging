@@ -7,11 +7,10 @@
 
 static File* gpx_log_file = NULL;
 static int gpx_log_counter = 0;
-static Storage* storage = NULL;
+Storage* storage = furi_record_open(RECORD_STORAGE);
 
 static void init_gpx_log(void) {
     char buffer[256];
-    Storage* storage = furi_record_open(RECORD_STORAGE);
     DateTime datetime;
     furi_hal_rtc_get_datetime(&datetime);
 
