@@ -3,6 +3,7 @@
 #include <furi_hal_rtc.h>
 #include <datetime.h>
 #include <furi.h>
+#include "gps_uart.h"
 
 static File* gpx_log_file = NULL;
 static int gpx_log_counter = 0;
@@ -21,7 +22,7 @@ static void init_gpx_log(void) {
 
     gpx_log_file = storage_file_alloc(storage);
     if(storage_file_open(gpx_log_file, filename, FSAM_WRITE, FSOM_CREATE_ALWAYS)) {
-        storage_file_printf(gpx_log_file,
+        storage_file_write(gpx_log_file,
                             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                             "<gpx version=\"1.1\" creator=\"FlipperGPS\">\n"
                             "<trk><name>GPS Log</name><trkseg>\n");
