@@ -9,6 +9,7 @@ typedef enum {
 } WorkerEvtFlags;
 
 #define WORKER_ALL_RX_EVENTS (WorkerEvtStop | WorkerEvtRxDone)
+static int current_gps_baudrate = 1;
 
 static void gps_uart_on_irq_cb(FuriHalSerialHandle* handle, FuriHalSerialRxEvent ev, void* context) {
     GpsUart* gps_uart = (GpsUart*)context;
