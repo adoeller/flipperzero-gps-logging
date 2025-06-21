@@ -3,6 +3,8 @@
 #include <minmea.h>
 #include "gps_uart.h"
 
+static int my_current_gps_baudrate = 1;
+
 typedef enum {
     WorkerEvtStop = (1 << 0),
     WorkerEvtRxDone = (1 << 1),
