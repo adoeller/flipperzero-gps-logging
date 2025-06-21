@@ -49,6 +49,9 @@ static void gps_uart_parse_nmea(GpsUart* gps_uart, char* line) {
             gps_uart->status.time_hours = frame.time.hours;
             gps_uart->status.time_minutes = frame.time.minutes;
             gps_uart->status.time_seconds = frame.time.seconds;
+            gps_uart->status.date_day = frame.date.day
+            gps_uart->status.date_month =  frame.date.month
+            gps_uart->status.date_year =  frame.date.year
 
             notification_message_block(gps_uart->notifications, &sequence_blink_green_10);
         }
@@ -66,9 +69,6 @@ static void gps_uart_parse_nmea(GpsUart* gps_uart, char* line) {
             gps_uart->status.time_hours = frame.time.hours;
             gps_uart->status.time_minutes = frame.time.minutes;
             gps_uart->status.time_seconds = frame.time.seconds;
-            gps_uart->status.date_day = frame.date.day
-            gps_uart->status.date_month =  frame.date.month
-            gps_uart->status.date_year =  frame.date.year
 
             notification_message_block(gps_uart->notifications, &sequence_blink_magenta_10);
         }
