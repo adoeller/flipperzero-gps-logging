@@ -6,8 +6,6 @@
 #include <gui/gui.h>
 #include <string.h>
 
-#include <storage/storage.h>
-#include <datetime.h>
 #include "log_gpx.c"
 
 static File* gpx_log_file = NULL;
