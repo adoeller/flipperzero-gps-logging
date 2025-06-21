@@ -3,7 +3,7 @@
 
 static void init_gpx_log(void) {
     Storage* storage = furi_record_open(RECORD_STORAGE);
-    Datetime datetime;
+    DateTime datetime;
     datetime_get(&datetime);
 
     char filename[128];
