@@ -1,7 +1,7 @@
 #include <storage/storage.h>
 #include <furi.h>
 #include <furi_hal_rtc.h>
-#include "gps_uart.h"
+//#include "gps_uart.h"
 
 #define TAG "GPX"
 
