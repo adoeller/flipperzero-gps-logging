@@ -8,9 +8,6 @@
 
 #include "log_gpx.c"
 
-static File* gpx_log_file = NULL;
-static int gpx_log_counter = 0;
-
 typedef enum {
     EventTypeTick,
     EventTypeKey,
