@@ -1,10 +1,9 @@
 #include <storage/storage.h>
-#include <datetime.h>
 #include <furi_hal.h>
 
 static void init_gpx_log(void) {
     Storage* storage = furi_record_open(RECORD_STORAGE);
-    DateTime datetime;
+    Datetime datetime;
     datetime_get(&datetime);
 
     char filename[128];
