@@ -5,6 +5,8 @@
 #include <furi.h>
 #include "gps_uart.h"
 
+#define TAG GPX
+
 static File* gpx_log_file = NULL;
 static int gpx_log_counter = 0;
 static Storage* storage = NULL;
@@ -56,18 +58,18 @@ static void log_gpx(GpsUart* gps_uart) {
         "<ele>%.2f</ele>\n"
         "<time>%04d-%02d-%02dT%02d:%02d:%02dZ</time>\n"
         "</trkpt>\n",
-        (float)gps_uart->status.latitude,
-        (float)gps_uart->status.longitude,
-        (float)gps_uart->status.altitude,
-//        gps_uart->status.date_year + 2000,
+        (double)gps_uart->status.latitude,
+        (double)gps_uart->status.longitude,
+        (double)gps_uart->status.altitude,
+        gps_uart->status.date_year + 2000,
         gps_uart->status.date_month,
         gps_uart->status.date_day,
 //        gps_uart->datetime.year,
 //        gps_uart->datetime.month,
 //        gps_uart->datetime.day,
-        gps_uart->status.time_hours,
-        gps_uart->status.time_minutes,
-        gps_uart->status.time_seconds);
+        (int)gps_uart->status.time_hours,
+        (int)gps_uart->status.time_minutes,
+        (int)gps_uart->status.time_seconds);
 
         if(len > 0 && len < sizeof(buffer)) {
             storage_file_write(gpx_log_file, buffer, len);
