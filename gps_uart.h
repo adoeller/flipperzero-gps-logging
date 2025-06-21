@@ -22,6 +22,9 @@ typedef struct {
     int time_hours;
     int time_minutes;
     int time_seconds;
+    int date_day;
+    int date_month;
+    int date_year;
 } GpsStatus;
 
 typedef enum { KNOTS, KPH, MPH, INVALID } SpeedUnit;
