@@ -3,7 +3,7 @@
 #include <furi_hal_rtc.h>
 #include "gps_uart.h"
 
-#define TAG GPX
+#define TAG "GPX"
 
 static File* gpx_log_file = NULL;
 static int gpx_log_counter = 0;
