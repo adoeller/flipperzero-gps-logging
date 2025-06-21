@@ -40,8 +40,7 @@ void init_gpx_log(void) {
     furi_record_close(RECORD_STORAGE);
 }
 
-//void log_gpx(GpsUart* gps_uart) {
-void log_gpx(void) {
+void log_gpx(GpsUart* gps_uart) {
     if(!gpx_log_file || !gps_uart) return;
     if(!gps_uart->status.valid) return;
 
