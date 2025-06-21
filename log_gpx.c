@@ -62,9 +62,9 @@ static void log_gpx(GpsUart* gps_uart) {
 //        gps_uart->status.date_year + 2000,
 //        gps_uart->status.date_month,
 //        gps_uart->status.date_day,
-        gps_uart->datetime.year,
-        gps_uart->datetime.month,
-        gps_uart->datetime.day,
+        datetime.year,
+        datetime.month,
+        datetime.day,
         (int)gps_uart->status.time_hours,
         (int)gps_uart->status.time_minutes,
         (int)gps_uart->status.time_seconds);
