@@ -6,6 +6,13 @@
 #include <gui/gui.h>
 #include <string.h>
 
+#include <storage/storage.h>
+#include <datetime.h>
+#include "log_gpx.c"
+
+static File* gpx_log_file = NULL;
+static int gpx_log_counter = 0;
+
 typedef enum {
     EventTypeTick,
     EventTypeKey,
@@ -196,6 +203,7 @@ int32_t gps_app(void* p) {
         if(!gps_uart->changing_baudrate) {
             furi_mutex_release(gps_uart->mutex);
             view_port_update(view_port);
+            log_gpx();
         } else {
             furi_delay_ms(1000);
             gps_uart->changing_baudrate = false;
