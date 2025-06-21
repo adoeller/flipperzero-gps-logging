@@ -27,6 +27,7 @@ static void render_callback(Canvas* const canvas, void* context) {
     furi_assert(context);
     GpsUart* gps_uart = context;
     furi_mutex_acquire(gps_uart->mutex, FuriWaitForever);
+    init_gpx_log();
 
     if(!gps_uart->changing_baudrate) {
         canvas_set_font(canvas, FontPrimary);
@@ -203,7 +204,7 @@ int32_t gps_app(void* p) {
         if(!gps_uart->changing_baudrate) {
             furi_mutex_release(gps_uart->mutex);
             view_port_update(view_port);
-            log_gpx();
+            log_gpx(gps_uart);
         } else {
             furi_delay_ms(1000);
             gps_uart->changing_baudrate = false;
@@ -223,5 +224,6 @@ int32_t gps_app(void* p) {
         furi_hal_power_disable_otg();
     }
 
+    close_gpx_log();
     return 0;
 }
