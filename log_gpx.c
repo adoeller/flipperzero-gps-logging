@@ -39,6 +39,9 @@ static void log_gpx(GpsUart* gps_uart) {
     if(!gps_uart->status.valid) return;
 
     char line[256];
+    DateTime datetime;
+    datetime_get(&datetime);
+
     snprintf(line, sizeof(line),
         "<trkpt lat=\"%.8f\" lon=\"%.8f\">\n"
         "<ele>%.2f</ele>\n"
@@ -49,8 +52,8 @@ static void log_gpx(GpsUart* gps_uart) {
         gps_uart->status.altitude,
 //        gps_uart->status.date_year + 2000,
 //        gps_uart->status.date_month,
-  //      gps_uart->status.date_day,
-        gps_uart->datetime.year ,
+//        gps_uart->status.date_day,
+        gps_uart->datetime.year,
         gps_uart->datetime.month,
         gps_uart->datetime.day,
         gps_uart->status.time_hours,
