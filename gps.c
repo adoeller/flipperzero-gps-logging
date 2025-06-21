@@ -172,11 +172,11 @@ int32_t gps_app(void* p) {
                         gps_uart_deinit_thread(gps_uart);
                         const int baudrate_length =
                             sizeof(gps_baudrates) / sizeof(gps_baudrates[0]);
-                        current_gps_baudrate++;
-                        if(current_gps_baudrate >= baudrate_length) {
-                            current_gps_baudrate = 0;
+                        my_current_gps_baudrate++;
+                        if(my_current_gps_baudrate >= baudrate_length) {
+                            my_current_gps_baudrate = 0;
                         }
-                        gps_uart->baudrate = gps_baudrates[current_gps_baudrate];
+                        gps_uart->baudrate = gps_baudrates[my_current_gps_baudrate];
 
                         gps_uart_init_thread(gps_uart);
                         gps_uart->changing_baudrate = true;
