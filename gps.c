@@ -8,6 +8,8 @@
 
 #include "log_gpx.h"
 
+int my_current_gps_baudrate = 1;
+
 typedef enum {
     EventTypeTick,
     EventTypeKey,
