@@ -6,7 +6,7 @@
 #define RX_BUF_SIZE 1024
 #define UART_CH (FuriHalSerialIdUsart)
 
-const int gps_baudrates[6] = {4800, 9600, 19200, 38400, 57600, 115200};
+static const int gps_baudrates[6] = {4800, 9600, 19200, 38400, 57600, 115200};
 int my_current_gps_baudrate = 1;
 
 typedef struct {
