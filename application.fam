@@ -1,7 +1,6 @@
 App(
     appid="gps_nmea",
     name="[NMEA] GPS",
-    sources=["gps.c", "log_gpx.c"],
     apptype=FlipperAppType.EXTERNAL,
     entry_point="gps_app",
     requires=["gui"],
