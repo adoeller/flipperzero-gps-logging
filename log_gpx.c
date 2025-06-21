@@ -7,7 +7,6 @@
 
 static File* gpx_log_file = NULL;
 static int gpx_log_counter = 0;
-static Storage* storage = NULL;
 
 void init_gpx_log(void) {
     char buffer[256];
