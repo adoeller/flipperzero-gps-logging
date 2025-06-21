@@ -1,7 +1,7 @@
 #include <storage/storage.h>
 #include <furi.h>
 #include <furi_hal_rtc.h>
-#include "gps_uart.h"
+//#include "gps_uart.h"
 
 #define TAG "GPX"
 
@@ -40,7 +40,8 @@ void init_gpx_log(void) {
     furi_record_close(RECORD_STORAGE);
 }
 
-void log_gpx(GpsUart* gps_uart) {
+//void log_gpx(GpsUart* gps_uart) {
+void log_gpx(void) {
     if(!gpx_log_file || !gps_uart) return;
     if(!gps_uart->status.valid) return;
 
