@@ -200,7 +200,7 @@ int32_t gps_app(void* p) {
         }
         if(!gps_uart->changing_baudrate) {
             furi_mutex_release(gps_uart->mutex);
-            log_gpx();
+            log_gpx(gps_uart);
             view_port_update(view_port);
         } else {
             furi_delay_ms(1000);
