@@ -23,7 +23,7 @@ static void init_gpx_log(void) {
 
     gpx_log_file = storage_file_alloc(storage);
     if(storage_file_open(gpx_log_file, filename, FSAM_WRITE, FSOM_CREATE_ALWAYS)) {
-        uint len = snprintf(
+        unsigned int len = snprintf(
             buffer,
             sizeof(buffer),
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -49,16 +49,16 @@ static void log_gpx(GpsUart* gps_uart) {
     DateTime datetime;
     datetime_get(&datetime);
 
-    uint len = snprintf(
+    unsigned int len = snprintf(
         buffer,
         sizeof(buffer),
-        "<trkpt lat=\"%.8lf\" lon=\"%.8lf\">\n"
-        "<ele>%.2lf</ele>\n"
+        "<trkpt lat=\"%.8f\" lon=\"%.8f\">\n"
+        "<ele>%.2f</ele>\n"
         "<time>%04d-%02d-%02dT%02d:%02d:%02dZ</time>\n"
         "</trkpt>\n",
-        gps_uart->status.latitude,
-        gps_uart->status.longitude,
-        gps_uart->status.altitude,
+        (float)gps_uart->status.latitude,
+        (float)gps_uart->status.longitude,
+        (float)gps_uart->status.altitude,
 //        gps_uart->status.date_year + 2000,
         gps_uart->status.date_month,
         gps_uart->status.date_day,
