@@ -1,6 +1,8 @@
 #include <storage/storage.h>
 #include <furi_hal.h>
 #include <furi_hal_rtc.h>
+#include <datetime.h>
+#include <furi.h>
 
 static File* gpx_log_file = NULL;
 static int gpx_log_counter = 0;
@@ -36,8 +38,8 @@ static void log_gpx(GpsUart* gps_uart) {
     if(!gpx_log_file || !gps_uart) return;
     if(!gps_uart->status.valid) return;
 
-    storage_file_printf(
-        gpx_log_file,
+    char line[256];
+    snprintf(line, sizeof(line),
         "<trkpt lat=\"%.8f\" lon=\"%.8f\">\n"
         "<ele>%.2f</ele>\n"
         "<time>%04d-%02d-%02dT%02d:%02d:%02dZ</time>\n"
@@ -57,7 +59,7 @@ static void log_gpx(GpsUart* gps_uart) {
 
     gpx_log_counter++;
     if(gpx_log_counter >= 60) {
-        storage_file_sync(gpx_log_file);
+        storage_file_write(gpx_log_file, line, strlen(line));
         gpx_log_counter = 0;
     }
 }
