@@ -6,7 +6,7 @@
 #include <gui/gui.h>
 #include <string.h>
 
-#include "log_gpx.c"
+#include "log_gpx.h"
 
 typedef enum {
     EventTypeTick,
