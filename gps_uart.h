@@ -7,7 +7,7 @@
 #define UART_CH (FuriHalSerialIdUsart)
 
 const int gps_baudrates[6] = {4800, 9600, 19200, 38400, 57600, 115200};
-//static int current_gps_baudrate = 1;
+int my_current_gps_baudrate = 1;
 
 typedef struct {
     bool valid;
