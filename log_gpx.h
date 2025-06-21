@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef LOG_GPX_H
 #define LOG_GPX_H_H
 
