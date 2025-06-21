@@ -39,11 +39,13 @@ static void log_gpx(GpsUart* gps_uart) {
     if(!gpx_log_file || !gps_uart) return;
     if(!gps_uart->status.valid) return;
 
-    char line[256];
+    char buffer[256];
     DateTime datetime;
     datetime_get(&datetime);
 
-    snprintf(line, sizeof(line),
+    int len = snprintf(
+        buffer,
+        sizeof(buffer),
         "<trkpt lat=\"%.8f\" lon=\"%.8f\">\n"
         "<ele>%.2f</ele>\n"
         "<time>%04d-%02d-%02dT%02d:%02d:%02dZ</time>\n"
@@ -52,18 +54,24 @@ static void log_gpx(GpsUart* gps_uart) {
         gps_uart->status.longitude,
         gps_uart->status.altitude,
 //        gps_uart->status.date_year + 2000,
-//        gps_uart->status.date_month,
-//        gps_uart->status.date_day,
-        gps_uart->datetime.year,
-        gps_uart->datetime.month,
-        gps_uart->datetime.day,
+        gps_uart->status.date_month,
+        gps_uart->status.date_day,
+//        gps_uart->datetime.year,
+//        gps_uart->datetime.month,
+//        gps_uart->datetime.day,
         gps_uart->status.time_hours,
         gps_uart->status.time_minutes,
         gps_uart->status.time_seconds);
 
+        if(len > 0 && len < sizeof(buffer)) {
+            storage_file_write(gpx_log_file, buffer, len);
+        }
+    
     gpx_log_counter++;
     if(gpx_log_counter >= 60) {
-        storage_file_write(gpx_log_file, line, strlen(line));
+        if (!storage_file_sync(gpx_log_file)) {
+            FURI_LOG_E(TAG, "failed to periodic flush file!");
+        }
         gpx_log_counter = 0;
     }
 }
