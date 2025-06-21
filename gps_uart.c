@@ -205,7 +205,7 @@ GpsUart* gps_uart_enable() {
 
     gps_uart->notifications = furi_record_open(RECORD_NOTIFICATION);
 
-    gps_uart->baudrate = gps_baudrates[current_gps_baudrate];
+    gps_uart->baudrate = gps_baudrates[my_current_gps_baudrate];
     gps_uart->changing_baudrate = false;
     gps_uart->backlight_on = false;
     gps_uart->speed_units = KNOTS;
