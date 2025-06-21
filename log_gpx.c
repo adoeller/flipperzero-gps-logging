@@ -1,3 +1,6 @@
+#include <storage/storage.h>
+#include <datetime.h>
+
 static void init_gpx_log(void) {
     Storage* storage = furi_record_open(RECORD_STORAGE);
     Datetime datetime;
