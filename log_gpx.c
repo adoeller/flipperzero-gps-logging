@@ -10,6 +10,7 @@ static int gpx_log_counter = 0;
 static Storage* storage = NULL;
 
 static void init_gpx_log(void) {
+    char buffer[256];
     Storage* storage = furi_record_open(RECORD_STORAGE);
     DateTime datetime;
     datetime_get(&datetime);
@@ -22,10 +23,15 @@ static void init_gpx_log(void) {
 
     gpx_log_file = storage_file_alloc(storage);
     if(storage_file_open(gpx_log_file, filename, FSAM_WRITE, FSOM_CREATE_ALWAYS)) {
-        storage_file_write(gpx_log_file,
-                            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                            "<gpx version=\"1.1\" creator=\"FlipperGPS\">\n"
-                            "<trk><name>GPS Log</name><trkseg>\n");
+        uint len = snprintf(
+            buffer,
+            sizeof(buffer),
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+            "<gpx version=\"1.1\" creator=\"FlipperGPS\">\n"
+            "<trk><name>GPS Log</name><trkseg>\n");
+            if(len > 0 && len < sizeof(buffer)) {
+                storage_file_write(gpx_log_file, buffer, len);
+            }
     } else {
         FURI_LOG_E("GPS", "Failed to create log file");
         storage_file_free(gpx_log_file);
@@ -43,11 +49,11 @@ static void log_gpx(GpsUart* gps_uart) {
     DateTime datetime;
     datetime_get(&datetime);
 
-    int len = snprintf(
+    uint len = snprintf(
         buffer,
         sizeof(buffer),
-        "<trkpt lat=\"%.8f\" lon=\"%.8f\">\n"
-        "<ele>%.2f</ele>\n"
+        "<trkpt lat=\"%.8lf\" lon=\"%.8lf\">\n"
+        "<ele>%.2lf</ele>\n"
         "<time>%04d-%02d-%02dT%02d:%02d:%02dZ</time>\n"
         "</trkpt>\n",
         gps_uart->status.latitude,
