@@ -201,6 +201,7 @@ void gps_uart_deinit_thread(GpsUart* gps_uart) {
 }
 
 GpsUart* gps_uart_enable() {
+    current_gps_baudrate =  1;
     GpsUart* gps_uart = malloc(sizeof(GpsUart));
 
     gps_uart->notifications = furi_record_open(RECORD_NOTIFICATION);
