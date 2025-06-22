@@ -8,6 +8,9 @@ A simple Flipper Zero application for NMEA 0183 serial GPS modules.
 
 Heavy lifting (NMEA parsing) provided by [minmea].
 
+## Difference
+Added logging to ext directory.
+
 ## Installation
 
 1. Navigate to the [FAP Build](https://github.com/ezod/flipperzero-gps/actions/workflows/build.yml)
